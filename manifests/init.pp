@@ -122,7 +122,7 @@ class hiera (
   $create_keys     = $hiera::params::create_keys,
   $gem_source      = $hiera::params::gem_source,
   $merge_behavior  = undef,
-  $extra_config    = '',
+  $extra_config    = undef,
 ) inherits hiera::params {
   File {
     owner => $owner,
