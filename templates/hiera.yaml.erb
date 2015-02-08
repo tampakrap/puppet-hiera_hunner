@@ -12,12 +12,12 @@ end -%>
 :logger: "<%= @logger %>"
 <% end -%>
 :hierarchy:
-<%= @hierarchy.to_yaml.split("\n")[1..-1].join("\n") %>
+<%= @hierarchy.to_yaml.split("\n")[1..-1].join("\n").gsub(/_percent_/, '%') %>
 :yaml:
-   :datadir: "<%= @datadir %>"
+   :datadir: "<%= @datadir.gsub(/_percent_/, '%') %>"
 <% if @eyaml -%>
 :eyaml:
-   :datadir: "<%= @eyaml_datadir %>"
+   :datadir: "<%= @eyaml_datadir.gsub(/_percent_/, '%') %>"
 <% if @eyaml_extension -%>
    :extension: "<%= @eyaml_extension %>"
 <% end -%>
