@@ -134,6 +134,10 @@ class hiera (
       ensure => directory,
     }
   }
+  if $merge_behavior {
+    $merge_behavior_options = ['native', 'deep', 'deeper']
+    validate_re($merge_behavior, $merge_behavior_options)
+  }
   if $eyaml {
     require hiera::eyaml
   }

@@ -7,5 +7,7 @@ summary 'Deploy hiera.yaml with hierarchy, and datadir'
 description ''
 project_page 'https://github.com/hunner/hunner-hiera'
 
+dependency 'puppetlabs/stdlib', '>= 4.5.1'
+
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
