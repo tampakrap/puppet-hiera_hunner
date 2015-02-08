@@ -1,30 +1,32 @@
 # managed by puppet
 ---
+<% if @backends -%>
 :backends:
 <% if @eyaml
   @backends.unshift('eyaml')
   @backends = @backends.uniq
 end -%>
 <%= @backends.to_yaml.split("\n")[1..-1].join("\n") %>
-:logger: <%= @logger %>
+<% end -%>
+<% if @logger -%>
+:logger: "<%= @logger %>"
+<% end -%>
 :hierarchy:
-<%= @hierarchy.to_yaml.split("\n")[1..-1].join("\n") %>
-
+<%= @hierarchy.to_yaml.split("\n")[1..-1].join("\n").gsub(/_percent_/, '%') %>
 :yaml:
-   :datadir: <%= @datadir %>
-
-<% if @eyaml %>
+   :datadir: "<%= @datadir.gsub(/_percent_/, '%') %>"
+<% if @eyaml -%>
 :eyaml:
-   :datadir: <%= @eyaml_datadir %>
+   :datadir: "<%= @eyaml_datadir.gsub(/_percent_/, '%') %>"
 <% if @eyaml_extension -%>
-   :extension: <%= @eyaml_extension %>
+   :extension: "<%= @eyaml_extension %>"
 <% end -%>
-   :pkcs7_private_key: <%= @confdir %>/keys/private_key.pkcs7.pem
-   :pkcs7_public_key:  <%= @confdir %>/keys/public_key.pkcs7.pem
-<% end %>
-
+   :pkcs7_private_key: "<%= @confdir %>/keys/private_key.pkcs7.pem"
+   :pkcs7_public_key:  "<%= @confdir %>/keys/public_key.pkcs7.pem"
+<% end -%>
 <% if @merge_behavior -%>
-:merge_behavior: <%= @merge_behavior -%>
+:merge_behavior: "<%= @merge_behavior %>"
 <% end -%>
-
+<% if @extra_config -%>
 <%= @extra_config %>
+<% end -%>
